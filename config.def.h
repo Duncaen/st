@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-char font[] = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
+char font[] = "-xos4-terminus-medium-r-normal-*-12-*-*-*-*-*-*-*,";
 int borderpx = 2;
 
 /*
@@ -16,7 +16,7 @@ int borderpx = 2;
  * 4: value of shell in /etc/passwd
  * 5: value of shell in config.h
  */
-static char shell[] = "/bin/sh";
+static char shell[] = "/usr/bin/yash";
 static char *utmp = NULL;
 static char stty_args[] = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
@@ -32,7 +32,7 @@ float chscale = 1.0;
  *
  * More advanced example: " `'\"()[]{}"
  */
-static char worddelimiters[] = " ";
+static char worddelimiters[] = " `'\"()[]{}";
 
 /* selection timeouts (in milliseconds) */
 unsigned int doubleclicktimeout = 300;
@@ -80,35 +80,79 @@ char termname[] = "st-256color";
  *
  *	stty tabs
  */
-static unsigned int tabspaces = 8;
+static unsigned int tabspaces = 4;
 
-/* Terminal colors (16 first used in escape sequence) */
+// Base 00 - Black
+#define COLOR00 "#181818"
+//Base 08 - Red
+#define COLOR01 "#ab4642"
+// Base 0B - Green
+#define COLOR02 "#a1b56c"
+// Base 0A - Yellow
+#define COLOR03 "#f7ca88"
+// Base 0D - Blue
+#define COLOR04 "#7cafc2"
+// Base 0E - Magenta
+#define COLOR05 "#ba8baf"
+// Base 0C - Cyan
+#define COLOR06 "#86c1b9"
+// Base 05 - White
+#define COLOR07 "#d8d8d8"
+
+// Base 03 - Bright Black
+#define COLOR08 "#585858"
+// Base 08 - Bright Red
+#define COLOR09 COLOR01
+// Base 0B - Bright Green
+#define COLOR10 COLOR02
+// Base 0A - Bright Yellow
+#define COLOR11 COLOR03
+// Base 0D - Bright Blue
+#define COLOR12 COLOR04
+// Base 0E - Bright Magenta
+#define COLOR13 COLOR05
+// Base 0C - Bright Cyan
+#define COLOR14 COLOR06
+
+// Base 07 - Bright White
+#define COLOR15 "#f8f8f8"
+// Base 09
+#define COLOR16 "#dc9656"
+// Base 0F
+#define COLOR17 "#a16946"
+// Base 01
+#define COLOR18 "#282828"
+// Base 02
+#define COLOR19 "#383838"
+// Base 04
+#define COLOR20 "#b8b8b8"
+// Base 06
+#define COLOR21 "#e8e8e8"
+
 const char *colorname[] = {
-	/* 8 normal colors */
-	"black",
-	"red3",
-	"green3",
-	"yellow3",
-	"blue2",
-	"magenta3",
-	"cyan3",
-	"gray90",
-
-	/* 8 bright colors */
-	"gray50",
-	"red",
-	"green",
-	"yellow",
-	"#5c5cff",
-	"magenta",
-	"cyan",
-	"white",
-
+	/* solarized dark */
+	COLOR00,  /*  0: black    */
+	COLOR01,  /*  1: red      */
+	COLOR02,  /*  2: green    */
+	COLOR03,  /*  3: yellow   */
+	COLOR04,  /*  4: blue     */
+	COLOR05,  /*  5: magenta  */
+	COLOR06,  /*  6: cyan     */ COLOR07,  /*  7: white    */
+	COLOR08,  /*  8: brblack  */
+	COLOR09,  /*  9: brred    */
+	COLOR10,  /* 10: brgreen  */
+	COLOR11,  /* 11: bryellow */
+	COLOR12,  /* 12: brblue   */
+	COLOR13,  /* 13: brmagenta*/
+	COLOR14,  /* 14: brcyan   */
+	COLOR15,  /* 15: brwhite  */
 	[255] = 0,
-
-	/* more colors can be added after 255 to use with DefaultXX */
-	"#cccccc",
-	"#555555",
+	COLOR16,
+	COLOR17,
+	COLOR18,
+	COLOR19,
+	COLOR20,
+	COLOR21
 };
 
 
@@ -118,8 +162,8 @@ const char *colorname[] = {
  */
 unsigned int defaultfg = 7;
 unsigned int defaultbg = 0;
-unsigned int defaultcs = 256;
-unsigned int defaultrcs = 257;
+unsigned int defaultcs = 7;
+unsigned int defaultrcs = 0;
 
 /*
  * Default shape of cursor
